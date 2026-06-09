@@ -1,0 +1,107 @@
+@server=http://localhost:4004
+@username=alice
+@password=
+
+
+### Customers
+# @name Customers_GET
+GET {{server}}/odata/v4/customer/Customers
+Authorization: Basic {{username}}:{{password}}
+
+
+### Customers
+# @name Customers_POST
+POST {{server}}/odata/v4/customer/Customers
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "ID": "63806768-0662-430e-b0ce-0a0065f8e7e1",
+  "name": "name-6380676",
+  "email": "email-6380676",
+  "active": true,
+  "createdAt": "2001-03-23T23:00:00.000Z",
+  "createdBy": "createdBy.3srd0@example.org",
+  "modifiedAt": "2015-02-28T23:00:00.000Z",
+  "modifiedBy": "modifiedBy.3srd0@example.org"
+}
+
+
+### Customers
+# @name Customers_PATCH
+PATCH {{server}}/odata/v4/customer/Customers/63806768-0662-430e-b0ce-0a0065f8e7e1
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "ID": "63806768-0662-430e-b0ce-0a0065f8e7e1",
+  "name": "name-6380676",
+  "email": "email-6380676",
+  "active": true,
+  "createdAt": "2001-03-23T23:00:00.000Z",
+  "createdBy": "createdBy.3srd0@example.org",
+  "modifiedAt": "2015-02-28T23:00:00.000Z",
+  "modifiedBy": "modifiedBy.3srd0@example.org"
+}
+
+
+### Customers
+# @name Customers_DELETE
+DELETE {{server}}/odata/v4/customer/Customers/63806768-0662-430e-b0ce-0a0065f8e7e1
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+
+### Orders
+# @name Orders_GET
+GET {{server}}/odata/v4/customer/Orders
+Authorization: Basic {{username}}:{{password}}
+
+
+### Orders
+# @name Orders_POST
+POST {{server}}/odata/v4/customer/Orders
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "ID": "88432005-103f-4685-be97-a1000a0025f1",
+  "status": 71,
+  "delivery_date": "2013-02-19",
+  "cost": 28349462.37,
+  "customer": {
+    "ID": "63806768-0662-430e-b0ce-0a0065f8e7e1"
+  },
+  "createdAt": "2019-01-16T23:00:00.000Z",
+  "createdBy": "createdBy.59jgg@example.org",
+  "modifiedAt": "2006-05-12T23:00:00.000Z",
+  "modifiedBy": "modifiedBy.59jgg@example.net"
+}
+
+
+### Orders
+# @name Orders_PATCH
+PATCH {{server}}/odata/v4/customer/Orders/88432005-103f-4685-be97-a1000a0025f1
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "ID": "88432005-103f-4685-be97-a1000a0025f1",
+  "status": 71,
+  "delivery_date": "2013-02-19",
+  "cost": 28349462.37,
+  "customer": {
+    "ID": "63806768-0662-430e-b0ce-0a0065f8e7e1"
+  },
+  "createdAt": "2019-01-16T23:00:00.000Z",
+  "createdBy": "createdBy.59jgg@example.org",
+  "modifiedAt": "2006-05-12T23:00:00.000Z",
+  "modifiedBy": "modifiedBy.59jgg@example.net"
+}
+
+
+### Orders
+# @name Orders_DELETE
+DELETE {{server}}/odata/v4/customer/Orders/88432005-103f-4685-be97-a1000a0025f1
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
