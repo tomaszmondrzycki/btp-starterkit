@@ -1,13 +1,22 @@
 using { btp.starterkit as stk } from '../db/schema';
-using { btp.starterkit.OrderStatus}
+
+@requires: ['customer']
 service CustomerService {
 
     entity Customers as projection on stk.Customers;
 
-    entity Orders as projection on stk.Orders;
+    entity Orders        as projection on stk.Orders
+        actions {
+            action cancel() returns Boolean;
+        };
+
+    type CancelledOrder {
+        ID: UUID;
+        changed: Boolean;
+    };
 
     type StatusCount :{
-        status: OrderStatus;
+        status: stk.OrderStatus;
         count: Integer;
     };
 

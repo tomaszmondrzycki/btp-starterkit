@@ -105,3 +105,9 @@ Authorization: Basic {{username}}:{{password}}
 DELETE {{server}}/odata/v4/customer/Orders/88432005-103f-4685-be97-a1000a0025f1
 Content-Type: application/json
 Authorization: Basic {{username}}:{{password}}
+
+### OrderCancel
+# @name OrderCancel
+POST {{server}}/odata/v4/customer/Orders('27222196-f79b-46c5-b6a0-f2668dd37e33')/cancel
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
