@@ -5,7 +5,10 @@ service CustomerService {
 
     entity Customers as projection on stk.Customers;
 
-    entity Orders        as projection on stk.Orders
+    entity Orders @(restrict: [{
+        grant: '*', // for the sake of simplicity let's allow all actions
+        where: 'customer.email = $user' // we want to use user login (for default identity provider it's email)
+    }]) as projection on stk.Orders
         actions {
             action cancel() returns Boolean;
         };
