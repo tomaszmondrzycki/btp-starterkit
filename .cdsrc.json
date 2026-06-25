@@ -1,14 +1,32 @@
 {
-  "requires": {
-    "auth": {
-      "kind": "mocked",
-      "users": {
-        "john": { 
-          "password": "123",
-          "roles": ["customer"],
-          "attr": {}
+  "build": {
+    "[production]": {
+      "target": "gen",
+      "tasks": [
+        {
+          "for": "nodejs",
+          "src": "srv",
+          "options": {
+            "model": [
+              "db",
+              "srv"
+            ]
+          }
+        },
+        {
+          "for": "typescript"
+        },
+        {
+          "for": "postgres",
+          "src": "db",
+          "options": {
+            "model": [
+              "db",
+              "srv"
+            ]
+          }
         }
-      }
+      ]
     }
   }
 }
