@@ -1,0 +1,50 @@
+# .github/workflows/deploy-to-cf.yml
+
+name: Deploy to CloudFoundry
+run-name: Deploy to CloudFoundry
+on:
+  workflow_dispatch:
+    inputs:
+      sso-key:
+        description: "Enter key for deployment. Retrieve https://login.cf.us10-001.hana.ondemand.com/passcode"
+        required: true
+        type: string
+
+jobs:
+  deployment:
+    name: Deployment to BTP-Cloud Foundry
+    runs-on: ubuntu-latest
+    container:
+      image: ppiper/cf-cli
+      options: --user 0:0 --privileged
+    env:
+      CF_API: ${{ secrets.ENDPOINT_CF }}
+      CF_SPACE: ${{ secrets.CF_SPACE }}
+      CF_ORGNAME: ${{ secrets.CF_ORGNAME }}
+      
+    steps:
+
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 22
+
+      # Set sso-key for deployment
+      - name: Set sso-key for deployment 
+        run: |
+          echo "CF_SSO_PASSCODE=${{ github.event.inputs.sso-key }}" >> $GITHUB_ENV
+      - name: Install MTA
+        run: |
+          cf install-plugin -f multiapps
+          npm i -g mbt
+          apt-get update && apt-get install make
+
+      - name: Login CF
+        run: cf login -a $CF_API -o $CF_ORGNAME -s $CF_SPACE --sso-passcode $CF_SSO_PASSCODE
+
+      - name: Build
+        run: mbt build
+
+      - name: CF Deploy
+        id: deploy
+        run: cf deploy mta_archives/*.mtar -f
