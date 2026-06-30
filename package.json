@@ -16,6 +16,7 @@
   "dependencies": {
     "@cap-js/postgres": "^2.3.0",
     "@sap/cds": "^9.9.1",
+    "@sap/xssec": "^4.13.0",
     "sqlite3": "^5"
   },
   "devDependencies": {
